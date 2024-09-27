@@ -3,18 +3,23 @@ project:
   output-dir: docs
 
 website:
-  title: "mmyiv.github.io"
+  title: "Michelle Yiv"
   navbar:
     left:
       - href: index.qmd
         text: Home
       - about.qmd
+      - href: resources.qmd
+        text: Resources
 
 format:
   html:
-    theme: cosmo
+    theme: 
+      light: simplex
+      dark: superhero
     css: styles.css
-    toc: true
+    toc: false #can enable toc on a page by page basis
+    page-layout: full
 
 
 

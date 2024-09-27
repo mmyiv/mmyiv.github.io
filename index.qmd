@@ -1,3 +1,23 @@
 ---
-title: "mmyiv.github.io"
+#title: "Michelle Yiv"
+image: michelle.jpeg
+about:
+  template: jolla
+  image-shape: round
+  image-width: 15em
+  links:
+    - text: LinkedIn
+      href: https://www.linkedin.com/in/michelle-yiv-2784021ba
+      target: _blank
+    - text: GitHub
+      href: https://github.com/mmyiv
+    - text: Email
+      href: mailto:mmyiv@ucsb.edu
+  
 ---
+
+Michelle Yiv graduated from the University of California, Davis, with a Bachelor of Science in Animal Science and a minor in Medical-Veterinary Entomology. During her undergraduate studies, Michelle focused on improving administrative processes and fish welfare at the Center for Aquatic Biology and Aquaculture. After graduation, Michelle worked at the City of Long Beach Animal Care Services, where she focused on improving shelter efficiency by updating administrative documents and workflows. Michelle decided to pivot from her pre-veterinary path and pursue Environmental Data Science, with her areas of interest being marine and energy resource management while advocating for animal health and welfare.
+
+## Education
+
+## Professional Experience
