@@ -26,5 +26,40 @@
     "title": "Michelle Yiv",
     "section": "Professional Experience",
     "text": "Professional Experience"
+  },
+  {
+    "objectID": "blogposts.html",
+    "href": "blogposts.html",
+    "title": "Blog",
+    "section": "",
+    "text": "blog post title\n\n\n\nQuarto\n\n\nMEDS\n\n\nsomething-cool\n\n\n\na short catchy description\n\n\n\nMichelle Yiv\n\n\nOct 18, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "blogpost/2024-10-18-my-first-post/index.html#this-is-my-second",
+    "href": "blogpost/2024-10-18-my-first-post/index.html#this-is-my-second",
+    "title": "blog post title",
+    "section": "This is my second",
+    "text": "This is my second\nHere’s my next paragraph2\nI am citing Sam (Csik, 2021)\nI am going to cite a journal article now.(Gaynor et al., 2022)"
+  },
+  {
+    "objectID": "blogpost/2024-10-18-my-first-post/index.html",
+    "href": "blogpost/2024-10-18-my-first-post/index.html",
+    "title": "blog post title",
+    "section": "",
+    "text": "I am going to insert a footnote here1"
+  },
+  {
+    "objectID": "blogpost/2024-10-18-my-first-post/index.html#this-is-my-first-section",
+    "href": "blogpost/2024-10-18-my-first-post/index.html#this-is-my-first-section",
+    "title": "blog post title",
+    "section": "",
+    "text": "I am going to insert a footnote here1"
+  },
+  {
+    "objectID": "blogpost/2024-10-18-my-first-post/index.html#footnotes",
+    "href": "blogpost/2024-10-18-my-first-post/index.html#footnotes",
+    "title": "blog post title",
+    "section": "Footnotes",
+    "text": "Footnotes\n\n\nHere is a new footnote↩︎\nhere is my second footnote↩︎"
   }
 ]

@@ -7,12 +7,14 @@ about:
   image-width: 15em
   links:
     - text: LinkedIn
+      icon: linkedin
       href: https://www.linkedin.com/in/michelle-yiv-2784021ba
       target: _blank
     - text: GitHub
+      icon: github
       href: https://github.com/mmyiv
     - text: Email
-      href: mailto:mmyiv@ucsb.edu
+      href: mailto:mmyiv@bren.ucsb.edu
   
 ---
 
@@ -21,3 +23,4 @@ Michelle Yiv graduated from the University of California, Davis, with a Bachelor
 ## Education
 
 ## Professional Experience
+

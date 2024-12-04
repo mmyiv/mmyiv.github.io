@@ -4,20 +4,31 @@ project:
 
 website:
   title: "Michelle Yiv"
+#  favicon: images/myfavicon.png
   navbar:
+   # title: false  
+   # logo: images/my-logo.png
+   # logo-alt: 'my alt text'
     left:
       - href: index.qmd
         text: Home
       - about.qmd
       - href: resources.qmd
         text: Resources
+      - blogposts.qmd
+    # - text: CV
+    #   href: CV/my-cv.pdf
+  page-footer: 
+    background: light
+    left: Copyright 2024, Michelle Yiv
+    right: This website is built with {{< fa brands github title="the octocat github icon" >}}
 
 format:
   html:
-    theme: 
-      light: simplex
-      dark: superhero
-    css: styles.css
+    theme: styles.scss
+    mainfont: Montserrat
+    # light: simplex
+    # dark: superhero
     toc: false #can enable toc on a page by page basis
     page-layout: full
 
