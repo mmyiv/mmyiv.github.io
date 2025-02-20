@@ -1,94 +1,24 @@
 [
   {
-    "objectID": "blogposts.html",
-    "href": "blogposts.html",
-    "title": "Blog",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Michelle Yiv",
     "section": "",
-    "text": "Analysis of the Thomas Fire\n\n\n\nMEDS\n\n\n\nBoundary and True/False Color Mapping with Air Quality Index Analysis\n\n\n\nMichelle Yiv\n\n\nDec 4, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nblog post title\n\n\n\nQuarto\n\n\nMEDS\n\n\nsomething-cool\n\n\n\na short catchy description\n\n\n\nMichelle Yiv\n\n\nOct 18, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAsthma rates in Asian Populations\n\n\n\nMEDS\n\n\n\nExploring the relationship between Asian Ethnic Groups and Asthma in Los Angeles County\n\n\n\nMichelle Yiv\n\n\nOct 18, 2024\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Michelle Yiv graduated from the University of California, Davis, with a Bachelor of Science in Animal Science and a minor in Medical-Veterinary Entomology. During her undergraduate studies, Michelle focused on improving administrative processes and fish welfare at the Center for Aquatic Biology and Aquaculture. After graduation, Michelle worked at the City of Long Beach Animal Care Services, where she focused on improving shelter efficiency by updating administrative documents and workflows. Michelle decided to pivot from her pre-veterinary path and pursue Environmental Data Science, with her areas of interest being marine and energy resource management while advocating for animal health and welfare."
   },
   {
-    "objectID": "blogpost/stats/asian_asthma.html",
-    "href": "blogpost/stats/asian_asthma.html",
-    "title": "Asthma rates in Asian Populations",
-    "section": "",
-    "text": "Although some environmental regulations have succeeded in decreasing concentration of air pollutants – especially those linked with respiratory issues, as of 2016 approximately 1,221,000 people in LA county have been diagnosed with asthma. Factors such as proximity to highways and concentrations of pollutants linked to asthma (NO2 and PM2.5) vary across the entirety of LA county.\nVarious articles have cited studies showing that minorities typically have higher rates of asthma, as seen by Simon et al (2003) and Meng et al (2007). However, both articles emphasize how African Americans have the highest rates of asthma, while Asians tend to be on the lower side of the spectrum. Thus, I wanted to explore how Asian communities are impacted by asthma. Although they are not as impacted, I know of many members in this community inside LA county that have asthma.\nI am looking at the relationship between Asian ethnic groups and asthma rates, defined as the percentage of asthma-related emergency department visits. However, I also want to account for more variables as there are various socioeconomic and environmental factors at play. Based on the study by Simon et al (2003), where Asthma rates had an inverse relationship to income, I explored how low income census tracts affect the relationship with asthma. Finally, I also wanted to explore how education level will affect the relationship because it can affect how informed decisions can be about health."
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Michelle Yiv",
+    "section": "Education",
+    "text": "Education\nMaster of Environmental Data Science (Expected June 2025)\n\nBren School of Environmental Science & Management, University of California, Santa Barbara\n\nBachelor of Science in Animal Science (June 2023)\n\nCollege of Agricultural and Environmental Science, University of California, Davis\nSpecialization in companion and captive animals - Minor in medical-veterinary entomology"
   },
   {
-    "objectID": "blogpost/stats/asian_asthma.html#why-are-we-exploring-relationships-between-asian-ethnic-groups-and-asthma-rates",
-    "href": "blogpost/stats/asian_asthma.html#why-are-we-exploring-relationships-between-asian-ethnic-groups-and-asthma-rates",
-    "title": "Asthma rates in Asian Populations",
-    "section": "",
-    "text": "Although some environmental regulations have succeeded in decreasing concentration of air pollutants – especially those linked with respiratory issues, as of 2016 approximately 1,221,000 people in LA county have been diagnosed with asthma. Factors such as proximity to highways and concentrations of pollutants linked to asthma (NO2 and PM2.5) vary across the entirety of LA county.\nVarious articles have cited studies showing that minorities typically have higher rates of asthma, as seen by Simon et al (2003) and Meng et al (2007). However, both articles emphasize how African Americans have the highest rates of asthma, while Asians tend to be on the lower side of the spectrum. Thus, I wanted to explore how Asian communities are impacted by asthma. Although they are not as impacted, I know of many members in this community inside LA county that have asthma.\nI am looking at the relationship between Asian ethnic groups and asthma rates, defined as the percentage of asthma-related emergency department visits. However, I also want to account for more variables as there are various socioeconomic and environmental factors at play. Based on the study by Simon et al (2003), where Asthma rates had an inverse relationship to income, I explored how low income census tracts affect the relationship with asthma. Finally, I also wanted to explore how education level will affect the relationship because it can affect how informed decisions can be about health."
-  },
-  {
-    "objectID": "blogpost/stats/asian_asthma.html#data",
-    "href": "blogpost/stats/asian_asthma.html#data",
-    "title": "Asthma rates in Asian Populations",
-    "section": "Data",
-    "text": "Data\n\nCensus Data\nAsian ethnic groups were sourced from the US Census Bureau using the tidycensus package. Population estimates were obtained from 2019 from the 5 year American Community Survey (2016-2020). 24 different asian populations were used: Total Asian, Asian Indian, Bangladeshi, Bhutanese, Burmese, Cambodian, Chinese (except Taiwanese), Filipino, Hmong, Indonesian, Japanese, Korean, Laotian, Malaysian, Mongolian, Nepalese, Okinawan, Pakistani, Sri Lankan, Taiwanese, Thai, Vietnamese, Other Asian (specified), and Other Asian (not specified).\nOther asian specified and not specified were not included in this analysis to make categorizing easier.\nThese populations were grouped into 5 different Asian ethnic groups by the following:\n\nEast Asian: Chinese (except Taiwanese), Japanese, Korean, Taiwanese, Mongolian, Okinawan.\nCentral Asian: Bhutanese.\nSouth Asian: Bangladeshi, Nepali, Pakistani, Sri Lankan.\nAsian Indian: Asian Indian.\nSoutheast Asian: Filipino, Vietnamese, Cambodian, Laotian, Burmese, Thai, Indonesian, Malaysian, Hmong.\n\n\n\nCalEnviroScreen 4.0\nAsthma estimates and Education percentages were sourced from CalEnviroScreen 4.0 The Asthma variable in this analysis is defined as the age-adjusted rate of emergency department visits for asthma, while the education variable is defined as the percent of population over 25 with less than a high school education.\n\n\nEJScreen\nFinally, the Low Income variable was sourced from EJScreen, and is defined as the percentage of households whose income is less than or equal to twice the poverty level.\nAll data were combined into one data set by census tract."
-  },
-  {
-    "objectID": "blogpost/stats/asian_asthma.html#how-will-we-analyze-this-data",
-    "href": "blogpost/stats/asian_asthma.html#how-will-we-analyze-this-data",
-    "title": "Asthma rates in Asian Populations",
-    "section": "How will we analyze this data?",
-    "text": "How will we analyze this data?\nTo start this analysis, I first wanted to view the relationship between Asthma and our different Asian ethnic groups. I started with a linear model, with Asthma being a function of each Asian ethnic group. Although I expect for the correlations and r-squared to be very low, I still wanted to see how this data would look against our regression line and what our residual plots (residuals plotted against predicted values) would look like.\nThen, I will add our other variables: Education and Low income. I expect for the r-squared value to increase because there are many factors that play into Asthma rates. There are a variety of socioeconomic factors such as access to health care and having the ability to accord medical expenses, in addition to environmental factors such as proximity to highways and NO2 concentration that contribute to both asthma rates and the percentage of people that actually visit the emergency department.\nI chose to focus on education and low income because that tends to dictate whether someone will visit the emergency department in my personal experiences. For example, if someone is unaware of warning signs of a severe asthma attack or if they are unwilling to pay the fees, choosing to “tough it out” at home, they typically will not visit the emergency department."
-  },
-  {
-    "objectID": "blogpost/stats/asian_asthma.html#results",
-    "href": "blogpost/stats/asian_asthma.html#results",
-    "title": "Asthma rates in Asian Populations",
-    "section": "Results",
-    "text": "Results\n\nInitial lm (Asthma ~ Asian Ethnic Group)\n\nThis figure depicts a scatter plot the relationship between the percentage of asthma related emergency department visits, the percentage of households with less than a high school education, and the total asian population. Here, we have most of our variables of interest. Low income was excluded from this plot due to its only two data points being covered. Additionally, only total Asian population was mapped here to gain a general idea of the relationship. However, it is hard to understand what this plot is trying to show, so I will now explore the relationship between Asthma and Asian ethnic groups through a linear model.\n\nClearly, this model is not a good fit for this relationship. However, we did expect this and hope to see better results when we add our additional variables. I would also like to note how the Residual plot for Asian Indians is completely different compared to the other plots. What this suggests is that Asian Indians may be over-represented for Asthma related emergency department visits. This data also plays a large impact on the total population, as seen in the plot.\n\n\nAdding Education and Low Income to our Model\n Here, our results are still not clear. Now all Asian Ethnic Groups’ plot follow a similar pattern of a large group of residuals between 0 and 100, and a small group of residuals with negative predicted values. This could indicate that this model is under predicting Asthma for some Asian Ethnic groups.\n\n\nUsing Log\n Here, I decided to take the log of both the response and the predictor because there were large amounts of variation in both. I took the log as a way to address the non-linearity in this spatial glm. However, non-linearity is still present as residuals are not scattered around zero as seen by this wedge-like shape. Furthermore, the variance of these residuals are not constant, which is a direct violation of one of the OLS assumptions, Finally, these plots are quite similar to each other, which indicates co linearity or correlations between variables.\nThe residual plot does not show whether different Asian people are more likely to have asthma.\nA formal interpretation is that every 1% increase in the total Asian population is associated with a 0.04% decrease in asthma prevalence. Essentially, areas with a higher proportion of Asian populations might have slightly lower asthma ED visits, but the effect is very small."
-  },
-  {
-    "objectID": "blogpost/stats/asian_asthma.html#future-analysis",
-    "href": "blogpost/stats/asian_asthma.html#future-analysis",
-    "title": "Asthma rates in Asian Populations",
-    "section": "Future Analysis",
-    "text": "Future Analysis\nPer Max’s suggestion, fitting this relationship into a generalized linear model (glm) with beta distribution, as this is used for data that falls between 0 and 1 (thus, these percentages). While all my additional variables are already in percentage form, the Asian ethnic groups are by count, not percentage. Therefore, I would need to convert them into percentages to keep all units consistent and usable for this new glm.\nFurthermore, it would be interesting to calculate percentages by census tract. I had only used census tracts to join the datasets together, and did not explore differences between them. Therefore, it would be interesting to see how the relationship is visualized, then further analysis could be done in areas with high prevalence. It would also be interesting to see what socioeconomic factors would contribute most to asthma rates between areas of low and high particulate matter 2.5 and/or position from the nearest highway, using a parallel slopes model. 4\nI would also look into other factors that would contribute to this relationship (OVB). Education played a much larger role compared to Low income, and exploring if those could be an interaction term would be interesting. I think an interaction term would be more likely because education level and income level are likely to be linked. If a family has the necessary resources, they are more likely to have the privilege of attending school instead of having to prioritize making a living.\nAlthough my analysis showed an (albeit small but) negative relationship between Asthma related emergency department visits, Asian ethnic groups, education level and low income, it was interesting the weight of each variable’s effect. I thought that Low income would be the driving force in this model, however Education was what impacted the r-squared value the most. While this could be due to the lack of data from EJScreen’s low income variable, I think that there is a reason for this that I would have liked to explore more."
-  },
-  {
-    "objectID": "blogpost/stats/asian_asthma.html#references",
-    "href": "blogpost/stats/asian_asthma.html#references",
-    "title": "Asthma rates in Asian Populations",
-    "section": "References",
-    "text": "References\n\nStudies\nSimon PA, Zeng Z, Wold CM, Haddock W, Fielding JE. Prevalence of childhood asthma and associated morbidity in Los Angeles County: impacts of race/ethnicity and income. J Asthma. 2003;40(5):535-43. doi: 10.1081/jas-120018788. PMID: 14529103.\nMeng YY, Babey SH, Hastert TA, Brown ER. California’s racial and ethnic minorities more adversely affected by asthma. Policy Brief UCLA Cent Health Policy Res. 2007 Feb;(PB2007-3):1-7. PMID: 17338094.\n\n\nDatasets used\nOffice of Environmental Health Hazard Assessment (OEHHA). (n.d.). CalEnviroScreen 4.0 report. Retrieved December 10, 2024, from https://oehha.ca.gov/calenviroscreen/report/calenviroscreen-40\nU.S. Environmental Protection Agency (EPA). (n.d.). Geodatabase of state EJScreen data at the tract level. Retrieved December 10, 2024, from https://www.epa.gov/ejscreen/download-ejscreen-data\nU.S. Census Bureau. (2019). 2019 American Community Survey 5-Year Estimates, Table B02018: Asian Alone or In Any Combination by Selected Groups [Data file]. Retrieved from https://data.census.gov"
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this site\n\n1 + 1\n\n[1] 2"
-  },
-  {
-    "objectID": "blogpost/2024-10-18-my-first-post/index.html",
-    "href": "blogpost/2024-10-18-my-first-post/index.html",
-    "title": "blog post title",
-    "section": "",
-    "text": "I am going to insert a footnote here1"
-  },
-  {
-    "objectID": "blogpost/2024-10-18-my-first-post/index.html#this-is-my-first-section",
-    "href": "blogpost/2024-10-18-my-first-post/index.html#this-is-my-first-section",
-    "title": "blog post title",
-    "section": "",
-    "text": "I am going to insert a footnote here1"
-  },
-  {
-    "objectID": "blogpost/2024-10-18-my-first-post/index.html#this-is-my-second",
-    "href": "blogpost/2024-10-18-my-first-post/index.html#this-is-my-second",
-    "title": "blog post title",
-    "section": "This is my second",
-    "text": "This is my second\nHere’s my next paragraph2\nI am citing Sam (Csik, 2021)\nI am going to cite a journal article now.(Gaynor et al., 2022)"
-  },
-  {
-    "objectID": "blogpost/2024-10-18-my-first-post/index.html#footnotes",
-    "href": "blogpost/2024-10-18-my-first-post/index.html#footnotes",
-    "title": "blog post title",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\nHere is a new footnote↩︎\nhere is my second footnote↩︎"
+    "objectID": "index.html#professional-experience",
+    "href": "index.html#professional-experience",
+    "title": "Michelle Yiv",
+    "section": "Professional Experience",
+    "text": "Professional Experience\nTeaching Assistant - Department of Biology and Environmental Science (September 2024 - present) - University of California, Santa Barbara - Contemporary Nutrition, Soils of California, Environmental Chemistry\nDirector’s Assistant and Fish Care Assistant (December 2019 - July 2023) - Center for Aquatic Biology and Aquaculture, University of California, Davis\nDrought Tolerance Intern (March 2023-July 2023) - Funk Lab, University of California, Davis"
   },
   {
     "objectID": "blogpost/thomas_fire/blogpost_yiv (1).html",
@@ -154,24 +84,80 @@
     "text": "California Department of Forestry and Fire Protection. (2024). California Fire Perimeters [Dataset]. Data.gov. https://data.ca.gov/dataset/california-fire-perimeters-all. (accessed Nov. 19, 2024).\nMicrosoft Corporation. (2024). Landsat 8 and Sentinel-2 Surface Reflectance Data [Dataset]. Microsoft Planetary Computer. https://planetarycomputer.microsoft.com/dataset/landsat-c2-l2(accessed Nov. 19, 2024).\nAirNow.(2024). Air Quality Index (AQI) Basics. [Dataset]. EPA.gov. https://www.airnow.gov/aqi/aqi-basics/. (accessed Oct. 29, 2024)\nC. Galaz García, EDS 220 - Working with Environmental Datasets, Course Notes. 2024. [Online]. https://meds-eds-220.github.io/MEDS-eds-220-course/book/preface.html. Accessed 5 December 2024."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Michelle Yiv",
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About Me",
     "section": "",
-    "text": "Michelle Yiv graduated from the University of California, Davis, with a Bachelor of Science in Animal Science and a minor in Medical-Veterinary Entomology. During her undergraduate studies, Michelle focused on improving administrative processes and fish welfare at the Center for Aquatic Biology and Aquaculture. After graduation, Michelle worked at the City of Long Beach Animal Care Services, where she focused on improving shelter efficiency by updating administrative documents and workflows. Michelle decided to pivot from her pre-veterinary path and pursue Environmental Data Science, with her areas of interest being marine and energy resource management while advocating for animal health and welfare."
+    "text": "My dream of becoming a veterinarian started in the second grade when we were tasked with envisioning our future careers. Since then, I have been working towards this goal by majoring in animal science at UC Davis. Rather than focusing on companion animals (i.e. cats & dogs), I wanted to have exposure to various animal species to gain a broad understanding of animal health and husbandry. I began working at the Center for Aquatic Biology and Aquaculture facility to learn about the conservation practices for green sturgeon and Chinook salmon. Initially, I performed tasks relating to fish husbandry and welfafe, and later assumed a position as the director’s assistant where I concentrated on collecting regulatory data while ensuring smooth facility operations.\nMy interest and focus shifted from animal science to animal-environment interactions when a massive fish death occurred at the aquaculture facility. Chlorine that was meant to disinfect the water had overflowed into the tanks, poisoning and killing over 21,000 fish. I was already aware of the responsibility of caring for a captive animal, where fish rely entirely on what we provide for them. Therefore, it is our duty to create an environment that is best suited for their natural behaviors and needs.\nThis incident made me take a step back from working directly with animals, instead discovering data-driven solutions that have lead me to starting my path towards data science."
   },
   {
-    "objectID": "index.html#education",
-    "href": "index.html#education",
-    "title": "Michelle Yiv",
-    "section": "Education",
-    "text": "Education"
+    "objectID": "about.html#transition-from-animal-to-data-science",
+    "href": "about.html#transition-from-animal-to-data-science",
+    "title": "About Me",
+    "section": "",
+    "text": "My dream of becoming a veterinarian started in the second grade when we were tasked with envisioning our future careers. Since then, I have been working towards this goal by majoring in animal science at UC Davis. Rather than focusing on companion animals (i.e. cats & dogs), I wanted to have exposure to various animal species to gain a broad understanding of animal health and husbandry. I began working at the Center for Aquatic Biology and Aquaculture facility to learn about the conservation practices for green sturgeon and Chinook salmon. Initially, I performed tasks relating to fish husbandry and welfafe, and later assumed a position as the director’s assistant where I concentrated on collecting regulatory data while ensuring smooth facility operations.\nMy interest and focus shifted from animal science to animal-environment interactions when a massive fish death occurred at the aquaculture facility. Chlorine that was meant to disinfect the water had overflowed into the tanks, poisoning and killing over 21,000 fish. I was already aware of the responsibility of caring for a captive animal, where fish rely entirely on what we provide for them. Therefore, it is our duty to create an environment that is best suited for their natural behaviors and needs.\nThis incident made me take a step back from working directly with animals, instead discovering data-driven solutions that have lead me to starting my path towards data science."
   },
   {
-    "objectID": "index.html#professional-experience",
-    "href": "index.html#professional-experience",
-    "title": "Michelle Yiv",
-    "section": "Professional Experience",
-    "text": "Professional Experience"
+    "objectID": "about.html#what-am-i-up-to-now",
+    "href": "about.html#what-am-i-up-to-now",
+    "title": "About Me",
+    "section": "What am I up to now?",
+    "text": "What am I up to now?\nI am a graduate student in the Master of Environmental Data Science at UC Santa Barbara’s Bren School of Environmental Science and Management. In this program, I have been learning coding skills in R and Python, which we apply to real-life environmental problems.\nThis program features a capstone project, where I and my team are exploring habitat composition and protection across California’s marine protected areas, complied into a scientific report. This report will be used to supplement the decadal evaluation of California’s MPA network, in addition to staff at UC Santa Barbara and other academic institutions and state partners at the California Department of Fish and Wildlife and California Ocean Protection Council.\nOutside of coursework, I am Teaching Assistant, formerly for the department of Molecular, Cellular, and Developmental Biology, and currently for the department of Environmental Studies. While I enjoyed leading sections for Contemporary Nutrition, engaging with students in the field for Soils of California has been extremely rewarding and fun. I am looking forward to helping students in Environmental Chemistry in the Spring!"
+  },
+  {
+    "objectID": "blogpost/stats/asian_asthma.html",
+    "href": "blogpost/stats/asian_asthma.html",
+    "title": "Asthma rates in Asian Populations",
+    "section": "",
+    "text": "Although some environmental regulations have succeeded in decreasing concentration of air pollutants – especially those linked with respiratory issues, as of 2016 approximately 1,221,000 people in LA county have been diagnosed with asthma. Factors such as proximity to highways and concentrations of pollutants linked to asthma (NO2 and PM2.5) vary across the entirety of LA county.\nVarious articles have cited studies showing that minorities typically have higher rates of asthma, as seen by Simon et al (2003) and Meng et al (2007). However, both articles emphasize how African Americans have the highest rates of asthma, while Asians tend to be on the lower side of the spectrum. Thus, I wanted to explore how Asian communities are impacted by asthma. Although they are not as impacted, I know of many members in this community inside LA county that have asthma.\nI am looking at the relationship between Asian ethnic groups and asthma rates, defined as the percentage of asthma-related emergency department visits. However, I also want to account for more variables as there are various socioeconomic and environmental factors at play. Based on the study by Simon et al (2003), where Asthma rates had an inverse relationship to income, I explored how low income census tracts affect the relationship with asthma. Finally, I also wanted to explore how education level will affect the relationship because it can affect how informed decisions can be about health."
+  },
+  {
+    "objectID": "blogpost/stats/asian_asthma.html#why-are-we-exploring-relationships-between-asian-ethnic-groups-and-asthma-rates",
+    "href": "blogpost/stats/asian_asthma.html#why-are-we-exploring-relationships-between-asian-ethnic-groups-and-asthma-rates",
+    "title": "Asthma rates in Asian Populations",
+    "section": "",
+    "text": "Although some environmental regulations have succeeded in decreasing concentration of air pollutants – especially those linked with respiratory issues, as of 2016 approximately 1,221,000 people in LA county have been diagnosed with asthma. Factors such as proximity to highways and concentrations of pollutants linked to asthma (NO2 and PM2.5) vary across the entirety of LA county.\nVarious articles have cited studies showing that minorities typically have higher rates of asthma, as seen by Simon et al (2003) and Meng et al (2007). However, both articles emphasize how African Americans have the highest rates of asthma, while Asians tend to be on the lower side of the spectrum. Thus, I wanted to explore how Asian communities are impacted by asthma. Although they are not as impacted, I know of many members in this community inside LA county that have asthma.\nI am looking at the relationship between Asian ethnic groups and asthma rates, defined as the percentage of asthma-related emergency department visits. However, I also want to account for more variables as there are various socioeconomic and environmental factors at play. Based on the study by Simon et al (2003), where Asthma rates had an inverse relationship to income, I explored how low income census tracts affect the relationship with asthma. Finally, I also wanted to explore how education level will affect the relationship because it can affect how informed decisions can be about health."
+  },
+  {
+    "objectID": "blogpost/stats/asian_asthma.html#data",
+    "href": "blogpost/stats/asian_asthma.html#data",
+    "title": "Asthma rates in Asian Populations",
+    "section": "Data",
+    "text": "Data\n\nCensus Data\nAsian ethnic groups were sourced from the US Census Bureau using the tidycensus package. Population estimates were obtained from 2019 from the 5 year American Community Survey (2016-2020). 24 different asian populations were used: Total Asian, Asian Indian, Bangladeshi, Bhutanese, Burmese, Cambodian, Chinese (except Taiwanese), Filipino, Hmong, Indonesian, Japanese, Korean, Laotian, Malaysian, Mongolian, Nepalese, Okinawan, Pakistani, Sri Lankan, Taiwanese, Thai, Vietnamese, Other Asian (specified), and Other Asian (not specified).\nOther asian specified and not specified were not included in this analysis to make categorizing easier.\nThese populations were grouped into 5 different Asian ethnic groups by the following:\n\nEast Asian: Chinese (except Taiwanese), Japanese, Korean, Taiwanese, Mongolian, Okinawan.\nCentral Asian: Bhutanese.\nSouth Asian: Bangladeshi, Nepali, Pakistani, Sri Lankan.\nAsian Indian: Asian Indian.\nSoutheast Asian: Filipino, Vietnamese, Cambodian, Laotian, Burmese, Thai, Indonesian, Malaysian, Hmong.\n\n\n\nCalEnviroScreen 4.0\nAsthma estimates and Education percentages were sourced from CalEnviroScreen 4.0 The Asthma variable in this analysis is defined as the age-adjusted rate of emergency department visits for asthma, while the education variable is defined as the percent of population over 25 with less than a high school education.\n\n\nEJScreen\nFinally, the Low Income variable was sourced from EJScreen, and is defined as the percentage of households whose income is less than or equal to twice the poverty level.\nAll data were combined into one data set by census tract."
+  },
+  {
+    "objectID": "blogpost/stats/asian_asthma.html#how-will-we-analyze-this-data",
+    "href": "blogpost/stats/asian_asthma.html#how-will-we-analyze-this-data",
+    "title": "Asthma rates in Asian Populations",
+    "section": "How will we analyze this data?",
+    "text": "How will we analyze this data?\nTo start this analysis, I first wanted to view the relationship between Asthma and our different Asian ethnic groups. I started with a linear model, with Asthma being a function of each Asian ethnic group. Although I expect for the correlations and r-squared to be very low, I still wanted to see how this data would look against our regression line and what our residual plots (residuals plotted against predicted values) would look like.\nThen, I will add our other variables: Education and Low income. I expect for the r-squared value to increase because there are many factors that play into Asthma rates. There are a variety of socioeconomic factors such as access to health care and having the ability to accord medical expenses, in addition to environmental factors such as proximity to highways and NO2 concentration that contribute to both asthma rates and the percentage of people that actually visit the emergency department.\nI chose to focus on education and low income because that tends to dictate whether someone will visit the emergency department in my personal experiences. For example, if someone is unaware of warning signs of a severe asthma attack or if they are unwilling to pay the fees, choosing to “tough it out” at home, they typically will not visit the emergency department."
+  },
+  {
+    "objectID": "blogpost/stats/asian_asthma.html#results",
+    "href": "blogpost/stats/asian_asthma.html#results",
+    "title": "Asthma rates in Asian Populations",
+    "section": "Results",
+    "text": "Results\n\nInitial lm (Asthma ~ Asian Ethnic Group)\n\nThis figure depicts a scatter plot the relationship between the percentage of asthma related emergency department visits, the percentage of households with less than a high school education, and the total asian population. Here, we have most of our variables of interest. Low income was excluded from this plot due to its only two data points being covered. Additionally, only total Asian population was mapped here to gain a general idea of the relationship. However, it is hard to understand what this plot is trying to show, so I will now explore the relationship between Asthma and Asian ethnic groups through a linear model.\n\nClearly, this model is not a good fit for this relationship. However, we did expect this and hope to see better results when we add our additional variables. I would also like to note how the Residual plot for Asian Indians is completely different compared to the other plots. What this suggests is that Asian Indians may be over-represented for Asthma related emergency department visits. This data also plays a large impact on the total population, as seen in the plot.\n\n\nAdding Education and Low Income to our Model\n Here, our results are still not clear. Now all Asian Ethnic Groups’ plot follow a similar pattern of a large group of residuals between 0 and 100, and a small group of residuals with negative predicted values. This could indicate that this model is under predicting Asthma for some Asian Ethnic groups.\n\n\nUsing Log\n Here, I decided to take the log of both the response and the predictor because there were large amounts of variation in both. I took the log as a way to address the non-linearity in this spatial glm. However, non-linearity is still present as residuals are not scattered around zero as seen by this wedge-like shape. Furthermore, the variance of these residuals are not constant, which is a direct violation of one of the OLS assumptions, Finally, these plots are quite similar to each other, which indicates co linearity or correlations between variables.\nThe residual plot does not show whether different Asian people are more likely to have asthma.\nA formal interpretation is that every 1% increase in the total Asian population is associated with a 0.04% decrease in asthma prevalence. Essentially, areas with a higher proportion of Asian populations might have slightly lower asthma ED visits, but the effect is very small."
+  },
+  {
+    "objectID": "blogpost/stats/asian_asthma.html#future-analysis",
+    "href": "blogpost/stats/asian_asthma.html#future-analysis",
+    "title": "Asthma rates in Asian Populations",
+    "section": "Future Analysis",
+    "text": "Future Analysis\nPer Max’s suggestion, fitting this relationship into a generalized linear model (glm) with beta distribution, as this is used for data that falls between 0 and 1 (thus, these percentages). While all my additional variables are already in percentage form, the Asian ethnic groups are by count, not percentage. Therefore, I would need to convert them into percentages to keep all units consistent and usable for this new glm.\nFurthermore, it would be interesting to calculate percentages by census tract. I had only used census tracts to join the datasets together, and did not explore differences between them. Therefore, it would be interesting to see how the relationship is visualized, then further analysis could be done in areas with high prevalence. It would also be interesting to see what socioeconomic factors would contribute most to asthma rates between areas of low and high particulate matter 2.5 and/or position from the nearest highway, using a parallel slopes model. 4\nI would also look into other factors that would contribute to this relationship (OVB). Education played a much larger role compared to Low income, and exploring if those could be an interaction term would be interesting. I think an interaction term would be more likely because education level and income level are likely to be linked. If a family has the necessary resources, they are more likely to have the privilege of attending school instead of having to prioritize making a living.\nAlthough my analysis showed an (albeit small but) negative relationship between Asthma related emergency department visits, Asian ethnic groups, education level and low income, it was interesting the weight of each variable’s effect. I thought that Low income would be the driving force in this model, however Education was what impacted the r-squared value the most. While this could be due to the lack of data from EJScreen’s low income variable, I think that there is a reason for this that I would have liked to explore more."
+  },
+  {
+    "objectID": "blogpost/stats/asian_asthma.html#references",
+    "href": "blogpost/stats/asian_asthma.html#references",
+    "title": "Asthma rates in Asian Populations",
+    "section": "References",
+    "text": "References\n\nStudies\nSimon PA, Zeng Z, Wold CM, Haddock W, Fielding JE. Prevalence of childhood asthma and associated morbidity in Los Angeles County: impacts of race/ethnicity and income. J Asthma. 2003;40(5):535-43. doi: 10.1081/jas-120018788. PMID: 14529103.\nMeng YY, Babey SH, Hastert TA, Brown ER. California’s racial and ethnic minorities more adversely affected by asthma. Policy Brief UCLA Cent Health Policy Res. 2007 Feb;(PB2007-3):1-7. PMID: 17338094.\n\n\nDatasets used\nOffice of Environmental Health Hazard Assessment (OEHHA). (n.d.). CalEnviroScreen 4.0 report. Retrieved December 10, 2024, from https://oehha.ca.gov/calenviroscreen/report/calenviroscreen-40\nU.S. Environmental Protection Agency (EPA). (n.d.). Geodatabase of state EJScreen data at the tract level. Retrieved December 10, 2024, from https://www.epa.gov/ejscreen/download-ejscreen-data\nU.S. Census Bureau. (2019). 2019 American Community Survey 5-Year Estimates, Table B02018: Asian Alone or In Any Combination by Selected Groups [Data file]. Retrieved from https://data.census.gov"
+  },
+  {
+    "objectID": "blogposts.html",
+    "href": "blogposts.html",
+    "title": "Blog",
+    "section": "",
+    "text": "Analysis of the Thomas Fire\n\n\n\nMEDS\n\n\n\nBoundary and True/False Color Mapping with Air Quality Index Analysis\n\n\n\nMichelle Yiv\n\n\nDec 4, 2024\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAsthma rates in Asian Populations\n\n\n\nMEDS\n\n\n\nExploring the relationship between Asian Ethnic Groups and Asthma in Los Angeles County\n\n\n\nMichelle Yiv\n\n\nOct 18, 2024\n\n\n\n\n\n\n\n\nNo matching items"
   }
 ]

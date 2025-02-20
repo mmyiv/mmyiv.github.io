@@ -1,9 +1,21 @@
 ---
-title: "About"
+title: "About Me"
 ---
 
-About this site
+## Transition from Animal to Data Science
 
-```{r}
-1 + 1
-```
+My dream of becoming a veterinarian started in the second grade when we were tasked with envisioning our future careers. Since then, I have been working towards this goal by majoring in animal science at UC Davis. Rather than focusing on companion animals (i.e. cats & dogs), I wanted to have exposure to various animal species to gain a broad understanding of animal health and husbandry. I began working at the Center for Aquatic Biology and Aquaculture facility to learn about the conservation practices for green sturgeon and Chinook salmon. Initially, I performed tasks relating to fish husbandry and welfafe, and later assumed a position as the director’s assistant where I concentrated on collecting regulatory data while ensuring smooth facility operations.  
+My interest and focus shifted from animal science to animal-environment interactions when a massive fish death occurred at the aquaculture facility. Chlorine that was meant to disinfect the water had overflowed into the tanks, poisoning and killing over 21,000 fish. I was already aware of the responsibility of caring for a captive animal, where fish rely entirely on what we provide for them. Therefore, it is our duty to create an environment that is best suited for their natural behaviors and needs. 
+
+This incident made me take a step back from working directly with animals, instead discovering data-driven solutions that have lead me to starting my path towards data science.
+
+## What am I up to now?
+
+I am a graduate student in the Master of Environmental Data Science at UC Santa Barbara's Bren School of Environmental Science and Management. In this program, I have been learning coding skills in R and Python, which we apply to real-life environmental problems.
+
+This program features a capstone project, where I and my team are exploring habitat composition and protection across California's marine protected areas, complied into a scientific report. This report will be used to supplement the decadal evaluation of California’s MPA network, in addition to staff at UC Santa Barbara and other academic institutions and state partners at the California Department of Fish and Wildlife and California Ocean Protection Council.
+
+Outside of coursework, I am Teaching Assistant, formerly for the department of Molecular, Cellular, and Developmental Biology, and currently for the department of Environmental Studies. While I enjoyed leading sections for Contemporary Nutrition, engaging with students in the field for Soils of California has been extremely rewarding and fun. I am looking forward to helping students in Environmental Chemistry in the Spring!
+
+
+

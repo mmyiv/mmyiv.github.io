@@ -15,12 +15,32 @@ about:
       href: https://github.com/mmyiv
     - text: Email
       href: mailto:mmyiv@bren.ucsb.edu
-  
 ---
 
 Michelle Yiv graduated from the University of California, Davis, with a Bachelor of Science in Animal Science and a minor in Medical-Veterinary Entomology. During her undergraduate studies, Michelle focused on improving administrative processes and fish welfare at the Center for Aquatic Biology and Aquaculture. After graduation, Michelle worked at the City of Long Beach Animal Care Services, where she focused on improving shelter efficiency by updating administrative documents and workflows. Michelle decided to pivot from her pre-veterinary path and pursue Environmental Data Science, with her areas of interest being marine and energy resource management while advocating for animal health and welfare.
 
 ## Education
 
+**Master of Environmental Data Science** (Expected June 2025)
+
+-   Bren School of Environmental Science & Management, University of California, Santa Barbara
+
+**Bachelor of Science in Animal Science** (June 2023)
+
+-   College of Agricultural and Environmental Science, University of California, Davis
+
+-   Specialization in companion and captive animals - Minor in medical-veterinary entomology
+
 ## Professional Experience
+
+**Teaching Assistant** - Department of Biology and Environmental Science (September 2024 - present)
+-  University of California, Santa Barbara
+- Contemporary Nutrition, Soils of California, Environmental Chemistry
+
+**Director's Assistant and Fish Care Assistant** (December 2019 - July 2023)
+-  Center for Aquatic Biology and Aquaculture, University of California, Davis
+
+**Drought Tolerance Intern** (March 2023-July 2023)
+-  Funk Lab, University of California, Davis
+
 
