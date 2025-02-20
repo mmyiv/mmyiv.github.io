@@ -13,8 +13,8 @@ website:
       - href: index.qmd
         text: Home
       - about.qmd
-      - href: resources.qmd
-        text: Resources
+      # - href: resources.qmd
+      #   text: Resources
       - blogposts.qmd
     # - text: CV
     #   href: CV/my-cv.pdf
