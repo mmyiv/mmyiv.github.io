@@ -1,0 +1,20 @@
+/*-- scss:defaults --*/
+
+// Colors
+$brown-sugar: #B47B55;
+$champagne-pink: #ECD7CB;
+$periwinkle: #D6DBFF;
+$vista-blue: #8E9AE6;
+$cambridge-blue: #7DAA92;
+$dark-slate-gray: #3C5453;
+
+// Import Google fonts
+
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+
+// Quarto Sass Variables
+$body-bg: $champagne-pink;
+$navbar-bg: $brown-sugar;
+$navbar-hi: $periwinkle;
