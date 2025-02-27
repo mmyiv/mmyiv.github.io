@@ -8,7 +8,7 @@ author:
     affiliation: MEDS
     affilitation-url: https://bren.ucsb.edu/masters-programs/master-environmental-data-science
 date: 2024-10-18
-categories: [MEDS]
+categories: [MEDS, R, STATISTICS]
 toc: true
 image: los_angeles.jpeg
 ---
