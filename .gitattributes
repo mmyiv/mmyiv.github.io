@@ -1,0 +1,2 @@
+*.gdb filter=lfs diff=lfs merge=lfs -text
+blogpost/estuary/data/PMEP_estuary.gdb/* filter=lfs diff=lfs merge=lfs -text
