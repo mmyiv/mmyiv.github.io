@@ -1,0 +1,388 @@
+---
+title: "Exploring the decline of estuaries"
+description: "Visualizing how habitat type, area, and diversity have changed since 1988"
+author: 
+  - name: Michelle Yiv
+    url: https://mmyiv.github.io
+    #orcid:
+    affiliation: MEDS
+    affilitation-url: https://bren.ucsb.edu/masters-programs/master-environmental-data-science
+date: 2025-03-14
+categories: [MEDS, R, DATA-VISUALIZATION]
+toc: true
+image: cover.jpeg
+execute: 
+  warning: false
+  message: false
+---
+
+## What is an estuary? Why are they relevant?
+
+According to the National Estuarine Research Reserve System, estuaries are "bodies of water usually found where rivers meet the sea". As a result of this unique mixing, many plant and animal communities have adapted to this brackish water and influx of nutrients, sediment, and other debris. These communities tend to be very productive and capable of adapting to a variety of conditions, but are still susceptible to substantial changes in nutrient and sediment. 
+
+Beyond providing essential habitats for these plants and animals, estuaries provide many benefits for humans as well. Estuaries provide ecosystem services, which is defined by the NOAA office of National Marine Sanctuaries as "the benefits people obtain from nature through use, consumption, enjoyment, and/or simply knowing these resources exist (non-use)". For example, they provide economic benefits such as tourism, transportation, and food sources. Estuaries also play a vital role in protecting areas from excess flood and storm water and filtering water.
+
+## Background
+
+Data from the [Pacific Marine and Estuarine Fish Habitat Partnership](https://www.pacificfishhabitat.org/data/estuarine-biotic-habitat) contains information about the biotic components of estuaries, or the living species (both plant and animal) that make up a habitat type. 
+
+
+I aim to create an infographic displaying how estuaries have declined overtime (1988-2011), focusing specifically on changes in biodiversity, area coverage by habitat, and the types of habitats observed.
+This infographic will use a line chart, an area chart, and a bar chart to show key trends and end with a call to action for conservation of estuaries. 
+
+## Infographic
+![](infographic.png){fig-alt="Infographic about how estuaries have declined from 1988 to 2011. There are three main plots: A line plot showing fluctuations in diversity due to temporary monitoring projects, a bar plot showing how eelgrass is the most common habitat, and a stacked area chart displaying different peaks in total area between eelgrass and wetlands. Wetland area peaks in 2009 due to monitoring efforts, not necessarily reflecting actual increases in area. Eelgrass area peaks in 2011 from restoration projects. Estuaries are vital to plants, animals and humans as they provide many vital services needed to thrive."}
+## Creating the visualization
+
+This infographic was compiled using Canva and the visualizations were created using R.
+
+### Load libraries
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+library(tidyverse)
+library(here)
+library(janitor)
+library(dplyr)
+
+library(sf)
+library(scales)
+library(ggbump)
+library(stringr)
+library(vegan)
+library(ggridges)
+```
+
+### Read in and clean data
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+# Path to the geodatabase folder
+gdb_path <- here('blogpost/estuary/data/PMEP_estuary.gdb')
+
+# List all layers (tables and feature classes) in the geodatabase
+layers <- st_layers(gdb_path)
+
+# Read in data 
+estuary <- st_read(gdb_path,layer = "PMEP_West_Coast_USA_Estuarine_Biotic_Habitat_Vers1_2"
+) %>%
+ clean_names()
+
+# Clean data -----------------------------------------------------------------------------------------------------------
+
+# Clean the data set
+estuary <- estuary %>%
+# Drop extra columns
+  select(-c('data_source', 'cmecs_bc_code', 'cmecs_link', 'data_source_vers', 'pmep_estuary_id', 'link', 'cmecs_id', 'acres', 'pmep_poly_id')) %>%
+# Rename columns to be more intuitive
+  rename(
+    name = estuary_name,
+    biotic_comp = cmecs_bc_name,
+    level = cmecs_level,
+    setting = cmecs_bc_setting,
+    class = cmecs_bc_class,
+    subclass = cmecs_bc_subclass,
+    group = cmecs_bc_group,
+    community = cmecs_bc_community,
+    modifier = cmecs_bc_modifier,
+    area_hectares = hectares, # Will convert to km2
+    year_data = data_year,
+    year_nwi = nwi_year,
+    habitat_percent = habitat_source_percent,
+    length_shape = shape_length,
+    area_shape = shape_area,
+    shape = Shape
+  ) %>%
+  # Convert area to km2
+    mutate(area_km2 = area_hectares * 0.01) %>%  
+    select(-area_hectares) %>%
+  # Convert N/A values to true NAs
+    mutate(across(where(is.character), ~ na_if(., "N/A"))) %>%
+  # Handle missing values
+  mutate(group = na_if(group, ""), # Replace empty strings in 'group' with NA
+         year_nwi = as.numeric(year_nwi)) %>%
+  filter(!is.na(group) & !is.na(year_nwi))
+```
+
+## Visualization 1: How has biodiversity changed over time?
+
+I used a line plot, filling the area underneath to show how biodiversity fluctuated, mainly due to monitoring projects. Biodiversity is calculated using the Shannon Index, where a greater number of habitats observed will lead to a higher index value, indicating more biodiversity. 
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+# Calculate Shannon diversity for each year
+biotic_diversity <- estuary %>%
+  st_drop_geometry() %>%
+  group_by(year_nwi) %>%
+  summarize(shannon_index = diversity(table(biotic_comp), index = "shannon"))
+
+# Plot Shannon Diversity Over Time
+ggplot(biotic_diversity, aes(x = year_nwi, y = shannon_index)) +
+  geom_line(linewidth = 1, color = "#D8C397") +
+  
+  # Turn into area chart per sam's suggestion
+  geom_area(fill = "#D8C397", alpha = 0.7) +
+  
+  # Add double-sided arrow on y-axis
+  geom_segment(aes(x = min(year_nwi), xend = min(year_nwi), 
+                   y = min(shannon_index), yend = max(shannon_index)), 
+               arrow = arrow(type = "closed", length = unit(0.2, "cm")), 
+               color = "black") + 
+
+  geom_segment(aes(x = min(year_nwi), xend = min(year_nwi), 
+                   y = max(shannon_index), yend = min(shannon_index)), 
+               arrow = arrow(type = "closed", length = unit(0.2, "cm")), 
+               color = "black") +
+  
+  # Highlight 2007-2010 with a transparent rectangle
+  annotate("rect", xmin = 2005, xmax = 2010, ymin = -Inf, ymax = Inf,
+           fill = "gray", alpha = 0.2) +
+  
+  # Annotation for the highlighted area
+  annotate("text", x = 2007.5, y = 0.5,
+           label = "Monitoring\nprojects\nled to a\ntemporary\nincrease in \nhabitats\nobserved", size = 8, family = "serif", color = '#999') +
+  
+  # # Labels -- commented out for infographic
+  # labs(title = "Diversity of Estuaries on the West Coast U.S.\ndecline after termination monitoring projects",
+  #      x = NULL, 
+  #      y = "Shannon Diversity Index",
+  #      caption = "Source: Pacific Marine and Estuarine Fish Habitat Partnership\nIndex values are determined by the number of habitats") +
+  
+  # Fit to edges
+  scale_x_continuous(expand = c(0.009, 0.0)) + # Adjust to keep arrowhead from being cut off
+  scale_y_continuous(expand = c(0,0)) +
+  
+  # Theme adjustments
+  theme_minimal() +
+  theme(
+        text = element_text(family = "serif", size = 18),
+        plot.title = element_text(size = 36, hjust = 0.5),
+        plot.subtitle = element_text(size = 14, hjust = 0.0),
+        plot.caption = element_text(size = 12),
+        panel.grid = element_blank(),
+        axis.line = element_line(color = "black", linewidth = 0.5),
+        axis.line.y = element_blank()) + # Remove y-axis line 
+
+  # Annotation along y axis to describe values
+  annotate("text", x = min(biotic_diversity$year_nwi) - .5, 
+           y = max(biotic_diversity$shannon_index, na.rm = TRUE) - 0.25,  
+           label = "Higher values indicate more diversity", 
+           angle = 90, hjust = 0.5, size = 7, family = "serif") 
+```
+
+## Visualization 2: How has area changed over time?
+
+Here, I used a stacked area chart to show changes in area between eelgrass and combined wetland types. I combined all the wetland types as there were very few data points for each subtype, and was not visible on the plot. 
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+# Data wrangling
+
+# Summarize area_km2 by biotic component and year
+estuary_summary <- estuary %>%
+  st_drop_geometry() %>%
+  filter(year_nwi >= 1995 & year_nwi <= 2017) %>%
+  group_by(group, year_nwi) %>%
+  summarise(total_area = sum(area_km2, na.rm = TRUE), .groups = 'drop')
+
+
+# Create a new column to group categories (simplify)
+estuary_filtered <- estuary_summary %>%
+  mutate(biotic_group = case_when(
+    group %in% c("Brackish Emergent Tidal Marsh", 
+                       "Brackish Tidal Scrub-Shrub Wetland", 
+                       "Brackish Tidal Forest/Woodland", 
+                       "Brackish Marsh") ~ "Brackish Wetlands",
+    group %in% c("Eelgrass", "Seagrass Bed") ~ "Eelgrass",
+    TRUE ~ group  # Keep other categories unchanged
+  )) %>%
+  group_by(year_nwi, biotic_group) %>%
+  summarise(total_area = sum(total_area, na.rm = TRUE)) %>%
+  ungroup()
+
+# Make a new df for bump chart
+estuary_bump <- as.data.frame(estuary_filtered) %>%
+  filter(year_nwi >= 1995 & year_nwi <= 2012) %>%
+  select(biotic_group, year_nwi, total_area)
+
+# Wrapped caption text
+wrapped_caption <- str_wrap("Brackish Emergent Tidal Marsh, Tidal Scrub-Shrub Wetland, Tidal Forest/Woodland and Marsh were combined into Brackish Wetland.", width = 150)
+
+
+# Changed to stacked area chart
+ggplot(estuary_bump, aes(x = year_nwi, y = total_area, fill = biotic_group)) +
+  geom_area(alpha = 0.7, size = 1) +
+
+  
+  # Set axis scale
+  scale_x_continuous(breaks = seq(1995, 2012, by = 2), expand = c(0.0, 0.0)) + # Prevent final year label from being cut off  
+  scale_y_continuous(expand = c(0,0)) +
+  
+  theme_minimal() +
+  
+  # Labels
+  labs(title = "Perceived wetland area increases with monitoring efforts\nEelgrass area peaks due to restoration efforts",
+    
+       x = NULL,  # May be redundant, commenting out for feedback 
+       y = "Total Area (km²)",
+    #   caption = paste(wrapped_caption,"\nSource: Pacific Marine and Estuarine Fish Habitat Partnership"),
+       fill = 'Biotic Habitat Type') +
+  
+# Annotation for wetland-------------------------------
+  
+  # Set vline
+  geom_vline(data = estuary_bump,
+           aes(xintercept = 2006),
+           linetype = "dashed", color = "black", size = 1) +
+  
+  # Add annotation
+  geom_text(data = estuary_bump, 
+            aes(x = 2002.75,  
+                y = max(total_area, na.rm = TRUE) * 0.8,
+                label = "Start of Brackish\nWetland monitoring\nproject"),
+            color = "black", size = 8, hjust = 0, family = "serif", fontface = 'italic') +
+
+# Annotation for Eelgrass -----------------------------
+    
+   # Set vline
+  geom_vline(data = estuary_bump,
+           aes(xintercept = 2008),
+           linetype = "dashed", color = "peachpuff4", size = 1) +
+  
+    # Add annotation
+  geom_text(data = estuary_bump, 
+            aes(x = 2006.25,  
+                y = max(total_area, na.rm = TRUE) * 0.95,
+                label = "Start of\nEelgrass\nrestoration\nproject & \nmonitoring"),
+            color = "peachpuff4", size = 8, hjust = 0, family = "serif", fontface = 'italic') +
+  
+# Annotation for end of both ---------------------------
+  
+  # Add vline
+  geom_vline(data = estuary_bump,
+           aes(xintercept = 2011),
+           linetype = "dashed", color = "black", size = 1.2) +
+  
+  geom_text(data = estuary_bump, 
+            aes(x = 2009.25,  
+                y = max(total_area, na.rm = TRUE) * 0.8,
+                label = "End of\nmonitoring\nand\nrestoration\nprojects"),
+            color = "black", size = 8, hjust = 0, family = "serif", fontface = 'italic') +
+  
+  # Edit theme
+  theme_minimal() +
+  
+  theme(
+        legend.position = 'bottom',
+        text = element_text(family = "serif", size = 18),
+        plot.title = element_text(size = 36, hjust = 0.5),
+        plot.subtitle = element_text(size = 14, hjust = 0.5),
+        plot.caption = element_text(size = 12),
+        panel.grid = element_blank(),
+        axis.line = element_line(color = "black", linewidth = 0.5)) +
+  
+  # Move legend title above values
+  guides(fill = guide_legend(title.position = "top", title.hjust = 0.5)) +
+
+  # Set custom colors
+  scale_fill_manual(values = c('#3C7BB7','#3BAF85'))
+```
+
+## Visualization 3: Do estuaries represent an equal proportion of habitat types?
+
+I wanted to look at what habitats were observed in estuaries, where this chart shows that eelgrass beds are far more prominent than marshes and wetlands. 
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+# Find counts first to decrease plotting time
+estuary_summary <- estuary %>%
+  st_drop_geometry() %>%
+  count(group, name = "count") %>%  # Count occurrences of each group
+  mutate(group = fct_reorder(group, count, .desc = FALSE))  # Reorder by count
+
+# Plot the data
+ggplot(data = estuary_summary, 
+       aes(x = group, y = count)) +
+  
+  geom_col(fill = NA, color = "#3BAF85", size = 1, width = 0.6) +
+    
+  # Flip axis and expand  
+  scale_y_continuous(expand = c(0, NA), limits = c(0, 150000), labels = scales::comma) + # Expand axis to make room for eelgrass 
+    
+    
+  # Apply wrapped labels
+  scale_x_discrete(labels = NULL) +
+  
+  # Label plot  
+  labs(title = "Seagrass beds (eelgrass) are the\nmost common estuary habitat type", 
+       x = NULL, 
+       y = "Observed occurrences",
+     #  caption = "Source: Pacific Marine and Estuarine Fish Habitat Partnership",
+       ) +
+    
+  # Add text labels  
+  geom_text( 
+            aes(label = scales::comma(count)), na.rm = TRUE,  # Use 'count' here instead of ..count..
+            hjust = 0.5, 
+            vjust = -.2,
+            size = 3) +
+  
+  # Add text labels on the left side of bars  
+  geom_text(aes(label = group, y = 0), 
+            hjust = 0,  
+            vjust = -3.1, 
+            size = 7, color = "black", fontface = "italic",
+            angle = 90) +
+  
+  # Adjust theme  
+  theme_minimal() + 
+    
+    
+  # Change to single color
+  scale_fill_manual(values = c('#3BAF85','#3BAF85','#3BAF85','#3BAF85','#3BAF85')) +
+  
+  theme(legend.position = "none", 
+        text = element_text(family = "serif", size = 18),
+        plot.title = element_text(size = 36, hjust = 0.5),
+        plot.subtitle = element_text(size = 14, hjust = 0.5),
+        plot.caption = element_text(size = 12),
+        panel.grid = element_blank(),
+        axis.line = element_line(color = "black", size = 0.5))
+```
+
+## Important design elements
+
+1. Graphic forms: Area charts and bar plot
+
+2. Text: The title clearly states the trends displayed by the visualizations, and the subtitles for the visualizations also summarize the individual trends. 
+
+3. Themes: Clean and neutral background
+
+4. Colors: Main focus on blues and greens, representative of an estuary. The main takeaway was in a different, lavender color to provide more emphasis.
+
+5. Typography: Serif was used for all visualizations. Coordinating colors to habitat types and bolding main takeaways were also used.
+
+6. General design: The progression of ideas follows an almost clockwise design. Each of the plots provide context for the others.
+
+7. Context: Provides definition of an estuary and its relevance for humans and species it hosts.
+
+8. Primary message: Estuaries are declining after monitoring stopped in 2011. While eelgrass is now thriving, marshes and wetlands are in danger.
+
+9. Accessibility: Alt text was provided for the infographic, and color contrast was checked using coolors.io.
+
+10. DEI lens: When I combined different habitat types for the area chart, I made sure to include a bar chart so that all habitats were represented. I also looked at statistics for all estuaries, because a global push is needed for conservation. Efforts have already been made in Southern California areas.
+
+## Citations
+
+National Estuarine Research Reserve System. (n.d.). What is an estuary? NOAA Office for Coastal Management. Retrieved from https://coast.noaa.gov/nerrs/about/what-is-an-estuary.html
+
+Pacific Marine and Estuarine Fish Habitat Partnership (PMEP). (2017). West Coast USA Estuarine Biotic Habitat. Retrieved February 20, 2024. https://www.pacificfishhabitat.org/data/estuarine-biotic-habitat
