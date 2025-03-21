@@ -57,7 +57,7 @@ library(ggridges)
 
 ### Read in and clean data
 
-```{r}
+```{r echo = T, results = 'hide'}
 #| code-fold: true
 #| code-summary: "Show the code"
 
