@@ -1,0 +1,215 @@
+---
+title: "Exploring BACI ANOVA in Aquaculture Systems"
+description: "Replicating statistical method present in Rennie et al. 2019 "
+author: 
+  - name: Michelle Yiv, Tom Gibbens-Matsuyama, Marina Kochuten
+    url: https://mmyiv.github.io
+    #orcid:
+    affiliation: MEDS
+    affilitation-url: https://bren.ucsb.edu/masters-programs/master-environmental-data-science
+date: 2025-03-14
+categories: [MEDS, R, STATISTICS]
+toc: true
+image: aqua.jpg
+execute: 
+  warning: false
+  message: false
+---
+
+This replication was done as a final group project for the MEDS program. This course is for EDS241: [Environmental Policy Evaluation](https://garberadamc.github.io/eds241-policy-eval/). Group members include Tom Gibbens-Matsuyama, Marina Kochuten, and Michelle Yiv.
+
+## Background
+
+This replication is based on the paper, *Impacts of freshwater aquaculture on fish communities: A whole-ecosystem experimental approach* (Rennie et al. 2019). This study looked at the impact of aquaculture on lake trout and minnow species. The main statistical methods used were linear regression for evaluating patterns in lake trout mean size, and BACI ANOVA for changes in minnow abundance and lake trout size.
+
+Aquaculture is an industry is worth close to a billion dollars, however only 5-10% of it are freshwater species. In particular, Canada has a huge potential for expansion, but all aquaculture productions have concerns about potential impacts to native communities and species.
+
+## What is BACI ANOVA?
+
+BACI is the causal Method, wheras ANOVA is the statistical analysis technique.
+
+BACI stands for Before-After-Control-Impact, and is commonly used to study ecological responses in large experimental units (e.g., lakes and forests) for which replication is difficult or impossible. With BACI comes an important assumption of Parallel trends. This assumption is that both the treatment and control group follow a similar trend if the treatment had not occurred. Therefore, any changes in the treatment group after treatment shows the isolated effect of the intervention. This assumption also requires for the control group to be a valid counterfactual.
+
+Anova is the analysis of Variance, which is a statistical test used to analyze the difference between means. ANOVA indicates when there is a significant difference between means of two or more groups, but it doesn't specify which groups are different. Therefore, if a significant result is found, a Tukey test is needed to specify the groups.
+
+## Applications to Rennie et al. 2019
+
+In this study, the main variables used in the BACI ANOVA are as follows, and separate analyses were done by season (Fall and Spring):
+
+-   Years were classified into three time periods
+
+    -   Before aquaculture (prior to 2003)
+
+    -   During aquaculture / treatment period (2003–2007)
+
+    -   After aquaculture (2008 to 2016)
+
+    -   Classification into time periods leads to less specific resolution of true year by year trends
+
+-   Minnow CUE
+
+    -   Minnow counts were summed daily and a catch-per-unit-effort (CUE) was estimated for spring and autumn
+
+    -   Square root transformed to normalize values
+
+-   Location
+
+    -   Treatment: Lake 375
+
+    -   Reference: Lake 373
+
+With these variables in mind, let's take a closer look at these methods. We start by first reading in and cleaning the data.
+
+### Load libraries, read in and clean data
+
+```{r echo = T, results = 'hide'}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+library(here)
+library(tidyverse)
+library(janitor)
+library(car) # For anova
+
+minnow <- read_csv(here("blogpost", "rennie", "data", "minnow.csv")) %>%
+  clean_names() %>%
+  
+  # Rename columns to fish species
+  rename(
+    northern_redbelly_dace = f182,
+    finescale_dace = f183,
+    fathead_minnow = f209,
+    northern_pearl_dace = f214,
+    slimy_sculpin = f382
+  ) 
+
+# Assign year to time periods
+minnow_baci <- minnow %>%
+    mutate(
+    period = case_when(
+      year >= 1998 & year <= 2002 ~ "pre",
+      year >= 2003 & year <= 2007 ~ "treatment",
+      year >= 2008 & year <= 2013 ~ "post",
+      TRUE ~ NA_character_  # Make NA outside the range
+    )) %>%
+# Sqrt minnow abundances
+  mutate(sqrt_minnow = sqrt(minnows),
+         sqrt_fathead_minnow = sqrt(fathead_minnow)) %>%
+  mutate(lake = as.factor(lake))
+
+  
+# Separate data into seasons
+fall <- minnow_baci %>%
+  filter(season == 'zFall')
+
+spring <- minnow_baci %>%
+  filter(season == 'aSpring')
+```
+
+Now, we will make the BACI model containing our variables, with a key interaction term for lake and period. We will then fit that model into an ANOVA. Note that type III was used because of unbalanced data, as the difference of observations between the lake is 36. This type of anova also tests for one factor while controlling the others. For example, this will test if there is a significant difference in minnow abundance between the different lakes, ignoring the effect of the time periods
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+# Test out BACI for fall
+
+# Fit the model
+fall_model <- aov(sqrt_minnow ~ lake * period, data = fall)
+fall_anova <- Anova(fall_model, type = "III") 
+
+# Print results
+print(fall_anova)
+```
+
+The actual output of this ANOVA can be a bit overwhelming I have defined what each one is here, but I will focus on our probability as this tells us what factors have significant effects.
+
+-   Sum of squares: Variability explained
+
+-   Degrees of freedom: F-statistic
+
+-   F-statistic: Effect of factor on response
+
+-   Probability: Factor has significant effect
+
+-   Residuals: Unexplained variation
+
+The intercept doesn’t really tell us much, but our lake and period interaction is statistically significant, and shows us that minnow abundance HAS changed differently by each lake However, ANOVA is unable to tell us which lake, which is why we use a post-hoc test (after the fact) - Tukey’s Honest significant difference!
+
+### Tukey test
+
+Tukey tells us which group means differ through paring all the means of each lake and time period
+
+I want to be very clear and say that this is not Turkey’s test. This is John Tukey, a mathematician and statistician who contributed greatly to statistical practice and data analysis. His test tells us the significance of these mean pairs, and how much bigger or smaller the value is in comparison. Magnitude is also considered, but context is needed. Mean abundance by lake or time period, depending on what is being compared by the test, should be used as reference.
+
+For example, let's compare lake 375 during treatment to lake 373 post treatment. With a p-value of 8.118520e-07 and a difference of 7.578, aquaculture production in the treatment lake has a greater CUE compared to the reference lake after aquaculture.
+
+### Robustness checks
+
+There were no robustness checks conducted in the paper. Therefore, we propose adding these to add more reliability to these results:
+
+-   The first is performing another statistical method, such as LR, which I will talk about later
+
+-   As temperature and DO are already variables, other variables similar to this can be added, such as total dissolved solids
+
+-   Finally, a placebo test can also be conducted
+
+    -   The BACI ANOVA will be applied to the pre treatment period (1988-2002)
+
+    -   Following the same structure, the treatment period will begin 8 years after 1988
+
+    -   If there are significant effects, that means that these increases are due to natural variation rather than the aquaculture treatment itself.
+
+### Assumptions
+
+As stated before, BACI requires the parallel trends assumption and for the control lake to be convincing counterfactual.
+
+-   The paper has minimal discussion about this, where the control is directly upstream from the treatment lake to separate nutrient flows. Multiple reference lakes (Lake 224 and 442) were included to account for fathead minnows absent in lake 373, and consistent sampling methods were used for all lakes.
+
+-   However, having the treatment lake immediately downstream from the control may have add spillover effect and violations of independence, and there were already clear pre-existing ecological differences (no flathead minnows) that exacerbate the disparity between the lakes.
+
+Other assumptions include assuming that the square root transformation had addressed the statistical assumptions, such as normal distribution and equal variance for ANOVA.
+
+## Is there a better statistical model?
+
+There are quite a few limitations with ANOVA:
+
+-   It assumed homogeneity of variance, but if CUE increases with treatment, variance may also increase, violating this assumption
+
+-   We look at these broad time periods rather than year to year variation
+
+-   ANOVA becomes unreliable with unequal observations since we compare means
+
+-   We cannot control for other factors such as temperature or oxygen
+
+Instead, a linear regression helps to account for this
+
+-   It does allow for heteroskedasticity, or non-constant variation
+
+-   We can look at all the years to get that year to year variation
+
+-   Fixed effects also controls for the time invariant unobserved differences (nutrient levels)
+
+Does account for more covariates that vary over time
+
+-   We can explicitly include temperature and oxygen levels, variables used for the other fish populations for minnows as well
+
+What would linear regression with fixed effects look like?
+
+CUE(minnow abundance) = B0 + B1(lake) + B2(time) + B3 (lake x time)
+
+-   We have our lake, which is a dummy variable. If it is 0, it is referring to the reference lake, and 1 for the treatment lake
+
+-   Time is NOT a dummy variable, as we want to see variation by year
+
+    -   AS we group our data by each year, we account for year specific biases. For example, if some unobserved variable occurs (change in environmental conditions), fixed effects controls for this by treating each year separately
+
+    -   Therefore, we can just worry about time variant variables, or variables that change over time within groups.
+
+-   To interpret these results, using interact_plot in R to visualize the relationship and the Wald test is used to determine interaction significance.
+
+Overall, using linear regression with fixed effects accounts for many of the limitations that ANOVA has while still being able to expand the analysis.
+
+## Citations
+
+Rennie, Michael & Kennedy, Patrick & Mills, Kenneth & Rodgers, Chandra & Charles, Colin & Hrenchuk, Lee & Chalanchuk, Sandra & Blanchfield, Paul & Paterson, Michael & Podemski, Cheryl. (2019). Impacts of freshwater aquaculture on fish communities: A whole-ecosystem experimental approach. Freshwater Biology. 64. 10.1111/fwb.13269.
